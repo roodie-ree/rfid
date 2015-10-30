@@ -1,15 +1,15 @@
 %Präambel
-\documentclass[a4paper,12pt,headsepline,footsepline]{scrartcl}
+\documentclass[a4paper,11pt,headsepline,footsepline,parskip=half]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{ngerman,graphicx}
+\usepackage{ngerman,graphicx,mathpazo}
 
 %Seite einrichten
 \areaset[2cm]		% Zusätzlicher Rand für die Bindung
         {17cm}{24cm}	% Textbreite und -Höhe
-        
-%Zeilenabstand/-vorschub, statt parskip
-\renewcommand{\baselinestretch}{1.24}
+
+%Zeilenabstand
+\linespread{1.24}
 
 %Linienstärke
 \newcommand\HRule{\noindent\rule{\linewidth}{1.5pt}}
@@ -85,7 +85,7 @@ welcher mit Barcodelesegeräten ausgelesen werden kann. Angewendet werden diese 
 
 \subsection{Welche Arten von Barcodes kann das Gerät erfassen?}
 
-Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was als EAN-13 ausgegeben wurde), 
+Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was als EAN-13 ausgegeben wurde),
 UPC-A, UPC-E, 3 of 9, Code39, Code128, Code EAN128 sowie Barcodes von Flaschen und den PCs im Labor, welche
 sich als EAN-8/13 und Code39 ausgaben.
 
