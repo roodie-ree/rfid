@@ -89,7 +89,8 @@ Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was al
 UPC-A, UPC-E, 3 of 9, Code39, Code128, Code EAN128 sowie Barcodes von Flaschen und den PCs im Labor, welche
 sich als EAN-8/13 und Code39 ausgaben.
 
-TODO: Die Texte
+Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten, die da waren: esaip Angers, h\_da, ?, fbi, Haardtweg, D-64295,
+wwwfbi, IRT2, IRT3, Ralf Mayer, Email, enjoy the rfid lesson -und- good luck for all your scanning. (\textbf{TODO}: nochmal Text prüfen)
 
 \subsection{Wie viele Barcodes können in einer bestimmten Zeit erfasst werden?}
 
@@ -105,7 +106,8 @@ sehr helle Lichtquelle zur Verfügung hatten, auch nicht das Sonnenlicht, da es 
 
 \subsection{Welche Auswirkung hätte Verschmutzung, Beschädigung des Barcodes?}
 
-TODO: Barcode kann nicht mehr gelesen werden oder nur mit Schwierigkeiten.
+Da das Scannen von Barcodes eine optische Methode ist, ist jede optische Änderung des Barcodes, eben Verschmutzung oder Beschädigung des
+Codes, ein Problem, die zu Schwierigkeiten oder aber zum Nicht-Erfassen des Barcodes durch das Lesegerät führt.
 
 \subsection{Hängt die Lesegeschwindigkeit mit der Informationsmenge im Code zusammen?}
 
@@ -116,11 +118,30 @@ speichern und es gab auch keinen erkennbaren Unterschied bei den Scans. Daher ne
 
 TODO
 
-\section{Schwingkreis, Resonanz, Lastmodulation und -Demodulation}
+\section{Schwingkreis, Resonanz, Lastmodulation und Demodulation}
 
-kommt noch
+TODO
 
-\section{1,3GHz Mikrowellen}
+\section{1,3 GHz Mikrowellen}
+
+\subsection{Lineare Polarisation}
+
+Im Gegensatz zur zirkulären Polarisation schwingen die Wellen(?) nur in einer Ebene, zum Beispiel nur senkrecht oder nur waagrecht.
+Das hat zur Folge, dass wenn das Empfangsgerät(?) nicht genauso wie der Sender ausgerichtet ist, dann wird das Signal mit jedem Grad Änderung
+zur Ausrichtung des Senders schwächer, bis es nicht mehr zu empfangen ist bei $90^\circ$ Drehung.
+
+\subsection{Absorption}
+
+Je höher die Frequenz ist, desto mehr wird in Flüssigkeiten wie Wasser absorbiert. Das ist für LF noch kein Problem, für Mikrowellen aber schon.
+Deswegen sind es vor allem \glqq Behälter\grqq mit Flüssigkeiten, wie Flaschen oder Menschen, die das Signal erheblich stören. Aber auch
+Objekte, die ungefähr so groß wie die Sender-/Empfänger-Antennen sind oder das in Bleistiften enthaltene Graphit haben Einfluss auf das
+empfangene Signal.
+
+(\textbf{TODO} Welche Auswirkung auf RFID?)
+
+\subsection{Signalstärke zu Abstand}
+
+TODO
 
 \section{RFID HF}
 
