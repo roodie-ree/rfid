@@ -1,45 +1,165 @@
-\documentclass[11pt,a4paper,parskip=half]{scrartcl}
+%Präambel
+\documentclass[a4paper,11pt,headsepline,footsepline,parskip=half]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath, amsfonts, amssymb}
-\usepackage{ngerman, graphicx, microtype, mathpazo, tabularx, xcolor}
-\usepackage[decimalsymbol=comma,per=frac]{siunitx}
-\usepackage[scale=0.7]{geometry}
+\usepackage{ngerman,graphicx,mathpazo}
+
+%Seite einrichten
+\areaset[2cm]		% Zusätzlicher Rand für die Bindung
+        {17cm}{24cm}	% Textbreite und -Höhe
+
+%Zeilenabstand
 \linespread{1.2}
 
-\author{David Falk (736532), Christian Lichtsinn (736787)}
-\title{RFID Praktikum 1}
+%Linienstärke
+\newcommand\HRule{\noindent\rule{\linewidth}{1.5pt}}
+
+%Kopf- und Fußzeile
+\usepackage{scrlayer-scrpage}
+\setlength{\headheight}{23pt}
+\lohead{\includegraphics[width=0.7cm]{logohdafbi-standalone} Hochschule Darmstadt}
+\rohead{David Falk, Christian Lichtsinn}
+\pagestyle{scrheadings}
+
+%sollte als letztes Paket geladen werden
+\usepackage{hyperref}
 
 \begin{document}
-\maketitle
+
+%Titelblatt
+\begin{titlepage}
+
+\begin{minipage}[c]{5cm}
+\includegraphics[width=5cm]{logohdafbi-standalone}
+\end{minipage}
+\hfil
+\begin{minipage}[c]{10cm}
+\begin{flushright}
+\Large Einführung in die Technik\\und Anwendung von\\
+\LARGE \textbf{RFID}
+\end{flushright}
+\end{minipage}
+
+\vspace*{1cm}
+
+\begin{minipage}[c]{8cm}
+\begin{flushleft}
+\large David Falk (736532)\\Christian Lichtsinn (736787)\\Praktikum 1 \& 2: 19.10.15 \& 02.11.15
+\end{flushleft}
+\end{minipage}
+\hfil
+\begin{minipage}[c]{8cm}
+\begin{flushright}
+\large Betreuer:\\Prof. Ralf S. Mayer\\F. Dotzauer, E. Wagner
+\end{flushright}
+\end{minipage}
+
+\vspace*{1cm}
+
+\HRule
+
+\vspace*{1cm}
+
+\noindent
+\large Thema: \textbf{AutoID -- Resonanz -- Frequenzen -- RFID-Grundlagen}
+
+\normalsize
 
 \section{OCR}
+
+Optical character recognition (OCR), bzw. Texterkennung ist eine Methode, mit der man mittels optischer
+Eingabegeräte wie Scanner, Kamera oder auch Fax-Gerät Text auf Bildern erkennen kann und diesen dann auch
+digital besser verarbeiten kann, sofern es denn einwandfrei funktioniert. Dass dem nicht immer so ist zeigt
+unter anderem ein Beispielbild auf Wikipedia\footnote{\url{https://de.wikipedia.org/wiki/Texterkennung\#/media/File:Beispiel_Texterkennung.png}}
+und ein Vortrag vom 31. Chaos Communication Congress, bei dem Informatiker David Kriesel über die Texterkennung
+von Xerox-Scannern berichtet.\footnote{Traue keinem Scan, den du nicht selbst gefälscht hast [31c3] von David Kriesel:\\ \url{https://www.youtube.com/watch?v=Vp03vyNspyI}}
+
+(Leider konnten wir aufgrund von fehlender Hardware keine Versuche zu Hause durchführen.)
+
+\end{titlepage}
+
 \section{Barcodes}
+
+Barcodes sind parallel nebeneinander aufgestellte Striche verschiedener Dicke, die einen binären Code darstellen,
+welcher mit Barcodelesegeräten ausgelesen werden kann. Angewendet werden diese Barcodes vor allem im Handel und Versand.
+
 \subsection{Welche Arten von Barcodes kann das Gerät erfassen?}
-\begin{itemize}
-  \item EAN 8
-\end{itemize}
+
+Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was als EAN-13 ausgegeben wurde),
+UPC-A, UPC-E, 3 of 9, Code39, Code128, Code EAN128 sowie Barcodes von Flaschen und den PCs im Labor, welche
+sich als EAN-8/13 und Code39 ausgaben.
+
+Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten, die da waren: esaip Angers, h\_da, ?, fbi, Haardtweg, D-64295,
+wwwfbi, IRT2, IRT3, Ralf Mayer, Email, enjoy the rfid lesson -und- good luck for all your scanning. (\textbf{TODO}: nochmal Text prüfen)
+
 \subsection{Wie viele Barcodes können in einer bestimmten Zeit erfasst werden?}
+
+Die Erfassung durch das Gerät geschieht unverzüglich. Da man das Gerät aber mit der Hand bedienen muss und den
+Scanbereich zum Barcode führen muss, kann man ca. 1 Barcode pro Sekunde erfassen.
+
 \subsection{Wie ändert sich die Erkennung mit Abstand, Winkel, Abdeckung, Einfluss von Licht?}
+
+Der Barcode ließ sich geschätzt bis zu einem $^3/_4$ Meter Abstand vom Lesegerät erfassen. Bis zu einem geschätzten
+Winkel von $80^\circ$ war der Barcode noch lesbar, solange alle Striche erfasst wurden. War der Barcode abgedeckt, war
+für das Lesegerät keine Erkennung mehr möglich. Den Einfluss von Licht konnten wir nicht testen, da wir keine
+sehr helle Lichtquelle zur Verfügung hatten, auch nicht das Sonnenlicht, da es am Versuchstag bewölkt war.
+
 \subsection{Welche Auswirkung hätte Verschmutzung, Beschädigung des Barcodes?}
+
+Da das Scannen von Barcodes eine optische Methode ist, ist jede optische Änderung des Barcodes, eben Verschmutzung oder Beschädigung des
+Codes, ein Problem, die zu Schwierigkeiten oder aber zum Nicht-Erfassen des Barcodes durch das Lesegerät führt.
+
 \subsection{Hängt die Lesegeschwindigkeit mit der Informationsmenge im Code zusammen?}
+
+Die Erfassung des Codes erfolgt komplett und unverzüglich. Man kann auch nicht so viel Information in den Barcodes
+speichern und es gab auch keinen erkennbaren Unterschied bei den Scans. Daher nein.
 
 \section{Oszilloskop, Spektrumanalysator und Frequenzgenerator}
 
-\section{Schwingkreis, Resonanz, Lastmodulation und -Demodulation}
+TODO
 
-\section{1,3GHz Mikrowellen}
+\section{Schwingkreis, Resonanz, Lastmodulation und Demodulation}
+
+TODO
+
+\section{1,3 GHz Mikrowellen}
+
+\subsection{Lineare Polarisation}
+
+Im Gegensatz zur zirkulären Polarisation schwingen die Wellen(?) nur in einer Ebene, zum Beispiel nur senkrecht oder nur waagrecht.
+Das hat zur Folge, dass wenn das Empfangsgerät(?) nicht genauso wie der Sender ausgerichtet ist, dann wird das Signal mit jedem Grad Änderung
+zur Ausrichtung des Senders schwächer, bis es nicht mehr zu empfangen ist bei $90^\circ$ Drehung.
+
+\subsection{Absorption}
+
+Je höher die Frequenz ist, desto mehr wird in Flüssigkeiten wie Wasser absorbiert. Das ist für LF noch kein Problem, für Mikrowellen aber schon.
+Deswegen sind es vor allem \glqq Behälter\grqq mit Flüssigkeiten, wie Flaschen oder Menschen, die das Signal erheblich stören. Aber auch
+Objekte, die ungefähr so groß wie die Sender-/Empfänger-Antennen sind oder das in Bleistiften enthaltene Graphit haben Einfluss auf das
+empfangene Signal.
+
+(\textbf{TODO} Welche Auswirkung auf RFID?)
+
+\subsection{Signalstärke zu Abstand}
+
+TODO
 
 \section{RFID HF}
 
 \section{NFC}
+
 \subsection{Was ist NFC?}
-NFC ist eine Art RFID, bei der die stikte Trennung zwischen Lesegerät und Tag/Transponder aufgehoben wird.
+
+NFC ist RFID, bei der die stikte Trennung zwischen Lesegerät und Tag/Transponder aufgehoben wird.
 NFC verwendet den HF-Bereich bei 13,56 MHz.
+
 \subsection{Vorbereitete Tags}
+
 \subsection{Tag konfigurieren}
+
 \subsection{Übertragung zwischen zwei Smartphones}
+
 Mit Android Beam ist es möglich Inhalte zwischen zwei Android-Telefonen übertragen.
 Wir konnten eine URL übertragen, wenn eine Website geöffnet ist und den App Store
 öffnen, wenn eine App geöffnet ist.
+
 \end{document}
