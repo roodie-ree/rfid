@@ -2,17 +2,17 @@
 \documentclass[paper=a4,fontsize=11pt,headsepline,footsepline,parskip=half]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
 \usepackage{amsmath,amsfonts,amssymb}
-\usepackage{graphicx,textcomp,mathpazo}
+\usepackage{ngerman,graphicx,textcomp,mathpazo,booktabs}
 \usepackage[decimalsymbol=comma,per=frac]{siunitx}
+\usepackage[textfont=sl,labelfont=bf]{caption}[2013/05/02]
 
 %Seite einrichten
 \areaset[2cm]		% Zusätzlicher Rand für die Bindung
         {17cm}{24cm}	% Textbreite und -Höhe
 
 %Zeilenabstand
-\linespread{1.2}
+\linespread{1.2} %Standardwert
 
 %Linienstärke
 \newcommand\HRule{\noindent\rule{\linewidth}{1.5pt}}
@@ -35,7 +35,7 @@
 \begin{minipage}[c]{5cm}
 \includegraphics[width=5cm]{logofbi}
 \end{minipage}
-\hfil
+\hfill
 \begin{minipage}[c]{10cm}
 \begin{flushright}
 \Large Einführung in die Technik\\und Anwendung von\\
@@ -89,8 +89,9 @@ welcher mit Barcodelesegeräten ausgelesen werden kann. Angewendet werden diese 
 Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was als EAN-13 ausgegeben wurde),
 UPC-A, UPC-E, 3 of 9, Code39, Code128, Code EAN128 sowie Barcodes von Flaschen und den PCs im Labor, welche als EAN-8/13 und Code39 erkannt wurden.
 
-Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten, die da waren: esaip Angers, h\_da, ?, fbi, Haardtring, D-64295,
-wwwfbi, IRT2, IRT3, Ralf Mayer, Email, enjoy the rfid lesson -und- good luck for all your scanning.
+Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten. Zum einen stand bereits daneben, welcher Text sich hinter den Barcodes
+versteckt (die wir auch bestätigen konnten), zum anderen gab es 5 Felder, die es nicht verraten haben. Diese 5 Barcodes enthielten die Texte:
+esaip Angers, IRT2, IRT3, enjoy the RFID lessons -und- good luck for all your studies.
 
 \subsection{Wie viele Barcodes können in einer bestimmten Zeit erfasst werden?}
 
@@ -99,7 +100,7 @@ Scanbereich zum Barcode führen muss, kann man ca. 1 Barcode pro Sekunde erfasse
 
 \subsection{Wie ändert sich die Erkennung mit Abstand, Winkel, Abdeckung, Einfluss von Licht?}
 
-Der Barcode ließ sich geschätzt mit bis zu einem $\SI{0.5}{\meter}$ Meter Abstand vom Lesegerät erfassen. Bis zu einem geschätzten
+Der Barcode ließ sich geschätzt mit bis zu einem $\SI{0.5}{\meter}$ Abstand vom Lesegerät erfassen. Bis zu einem geschätzten
 Winkel von $80\degree$ war der Barcode noch lesbar, solange alle Striche erfasst wurden. War der Barcode abgedeckt, war
 für das Lesegerät keine Erkennung mehr möglich. Den Einfluss von Licht konnten wir nicht testen, da wir keine
 sehr helle Lichtquelle zur Verfügung hatten, auch nicht das Sonnenlicht, da es am Versuchstag bewölkt war.
@@ -116,11 +117,34 @@ speichern und es gab auch keinen erkennbaren Unterschied bei den Scans. Daher ne
 
 \section{Oszilloskop, Spektrumanalysator und Frequenzgenerator}
 
-TODO
+TODO: Oszilloskop: Amplitude gegen Zeit, Spektrumanalysator: Amplitude gegen Frequenz, Amplitudenmodulation: AM, Frequenzmodulation: FM,
+Seitenbänder
 
 \section{Schwingkreis, Resonanz, Lastmodulation und Demodulation}
 
 TODO
+
+%\newpage
+\begin{table}[ht]
+\caption{\label{tab:resonanzkurve}Messwerte zur Bestimmung der Resonanzkurve.}
+\centering
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+  f [kHz] & U [V] & f [kHz] & U [V] & f [kHz] & U [V]\\
+\midrule
+ 100 & 8,4 & 129 & 61,2 & 139 & 52,4\\
+ 102 & 9,2 & 130 & 65,2 & 140 & 49,6\\
+ 110 & 12,8 & 131 & 68,0 & 142 & 44,4\\
+ 117 & 19,6 & 132 & 68,8 & 144 & 39,2\\
+ 120 & 24,0 & 133 & 68,0 & 146 & 36,0\\
+ 122 & 28,8 & 134 & 66,8 & 150 & 30,0\\
+ 124 & 34,4 & 135 & 64,4 & 155 & 24,4\\
+ 126 & 43,2 & 136 & 61,2 & 160 & 21,2\\
+ 127 & 49,2 & 137 & 58,4 & 170 & 17,2\\
+ 128 & 55,2 & 138 & 55,2 & & \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{1,3 GHz Mikrowellen}
 
@@ -135,7 +159,7 @@ zur Ausrichtung des Senders schwächer wird, bis es nicht mehr zu empfangen ist 
 Je höher die Frequenz ist, desto mehr wird in Flüssigkeiten wie Wasser absorbiert. Das ist für LF noch kein Problem, für Mikrowellen aber schon.
 Deswegen sind es vor allem \glqq Behälter\grqq{} mit Flüssigkeiten, wie Flaschen oder Menschen, die das Signal erheblich stören. Aber auch
 Objekte, die ungefähr so groß wie die Sender-/Empfänger-Antennen sind oder das in Bleistiften enthaltene Graphit haben Einfluss auf das
-empfangene Signal.
+empfangene Signal. Auch Alufolie ist in der Lage das Signal zu stören, bzw. komplett zu eliminieren.
 
 (\textbf{TODO} Welche Auswirkung auf RFID?)
 
