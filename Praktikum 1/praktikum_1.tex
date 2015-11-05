@@ -5,7 +5,7 @@
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{ngerman,graphicx,textcomp,mathpazo,booktabs}
 \usepackage[decimalsymbol=comma,per=frac]{siunitx}
-\usepackage[textfont=sl,labelfont=bf]{caption}[2013/05/02]
+\usepackage[textfont=sl,labelfont=bf]{caption}
 
 %Seite einrichten
 \areaset[2cm]		% Zusätzlicher Rand für die Bindung
@@ -89,9 +89,9 @@ welcher mit Barcodelesegeräten ausgelesen werden kann. Angewendet werden diese 
 Wir waren in der Lage, folgende Barcodes zu scannen: EAN-8, EAN-13, ISBN (was als EAN-13 ausgegeben wurde),
 UPC-A, UPC-E, 3 of 9, Code39, Code128, Code EAN128 sowie Barcodes von Flaschen und den PCs im Labor, welche als EAN-8/13 und Code39 erkannt wurden.
 
-Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten. Zum einen stand bereits daneben, welcher Text sich hinter den Barcodes
-versteckt (die wir auch bestätigen konnten), zum anderen gab es 5 Felder, die es nicht verraten haben. Diese 5 Barcodes enthielten die Texte:
-esaip Angers, IRT2, IRT3, enjoy the RFID lessons -und- good luck for all your studies.
+Zusätzlich gab es noch weitere Barcodes, die kurze Texte codiert hatten. Bei einigen stand bereits daneben, welcher Text sich hinter den Barcodes
+versteckt (die wir auch bestätigen konnten), bei anderen wurde es nicht verraten. Diese 5 Barcodes enthielten die Texte:
+\glqq esaip Angers\grqq{}, \glqq IRT2\grqq{}, \glqq IRT3 \grqq{}, \glqq enjoy the RFID lessons\grqq{} und \glqq good luck for all your studies\grqq{}.
 
 \subsection{Wie viele Barcodes können in einer bestimmten Zeit erfasst werden?}
 
@@ -113,14 +113,14 @@ Codes ein Problem, das zu Schwierigkeiten oder zum Nicht-Erfassen des Barcodes d
 \subsection{Hängt die Lesegeschwindigkeit mit der Informationsmenge im Code zusammen?}
 
 Die Erfassung des Codes erfolgt komplett und unverzüglich. Man kann auch nicht sehr viel Information in den Barcodes
-speichern und es gab auch keinen erkennbaren Unterschied bei den Scans. Daher nein.
+speichern und es gab keinen erkennbaren Unterschied bei den Scans. Daher nein.
 
 \section{Oszilloskop, Spektrumanalysator und Frequenzgenerator}
 
 Im Oszilloskop wird die Amplitude gegen die Zeit aufgetragen und das empfangene Signal als Sinuskurve dargestellt. Damit lässt sich u.a.
 die Amplitudenmodulation sehr gut darstellen. Dagegen sieht man Seitenbänder kaum. Dafür ist der Spektrumanalysator besser geeignet, bei
 dem die Amplitude gegen die Frequenz aufgetragen ist. Damit lassen sich, wie bereits geschrieben, Seitenbänder und damit die Bandbreite
-besser darstellen und damit auch besser untersuchen. So sind im Spektrumanalysator die verschiedenen WLAN-Kanäle deutlich zu erkennen.
+besser darstellen und damit auch besser untersuchen. So sind im Spektrumanalysator z. B. die verschiedenen WLAN-Kanäle deutlich zu erkennen.
 
 \section{Schwingkreis, Resonanz, Lastmodulation und Demodulation}
 
@@ -133,7 +133,7 @@ noch gerade verlaufen). Danach wird die Energieübertragung schwächer. Die Spul
 Was hingegen nicht funktioniert ist, wenn die Spulen um $90\degree$ zueinander gedreht sind oder sich unter einer Spule eine Alufolie
 befindet, die das Magnetfeld stört.
 
-Um die Resonanzbreite zu bestimmen, muss erstmal die Resonanzkurve gemessen werden. Die Messwerte dazu befinden sich in Tabelle \ref{tab:resonanzkurve}
+Um die Resonanzbreite zu bestimmen, muss zuerst die Resonanzkurve gemessen werden. Die Messwerte dazu befinden sich in Tabelle \ref{tab:resonanzkurve}
 auf Seite \pageref{tab:resonanzkurve}.
 
 \begin{table}[ht]
@@ -157,6 +157,11 @@ auf Seite \pageref{tab:resonanzkurve}.
 \end{tabular}
 \end{table}
 
+\begin{center}
+\includegraphics[width=0.7\linewidth]{resonanzkurve.png}
+\captionof{figure}{\label{fig:resonanzkurve}Resonanzkurve.}
+\end{center}
+
 Um die Resonanzbreite bestimmen zu können, müssen wir erst die maximale Spannung bestimmen, die bei $\SI{68.8}{\volt}$ liegt. Dann muss
 die obere und untere Grenzfrequenz bestimmt werden, die sich dort befindet, wo auf der Resonanzkurve die maximale Spannung auf $\frac{1}{\sqrt{2}}$
 dessen gefallen ist, also auf $\SI{48.6}{\volt}$. Die obere und untere Grenzfrequenz liegt bei $f_o = 140,4 kHz$ und $f_u = 126,9 kHz$.
@@ -168,20 +173,21 @@ Die Resonanzbreite ist die Differenz der Grenzfrequenzen, also $b = f_o - f_u = 
 
 Im Gegensatz zur zirkulären Polarisation schwingen die Wellen(?) nur in einer Ebene, zum Beispiel nur senkrecht oder nur waagrecht.
 Das hat zur Folge, dass wenn das Lesegerät nicht genauso wie der Sender ausgerichtet ist, das Signal mit jedem Grad Änderung
-zur Ausrichtung des Senders schwächer wird, bis es nicht mehr zu empfangen ist bei $90\degree$ Drehung.
+zur Ausrichtung des Senders schwächer wird, bis es bei $90\degree$ Drehung nicht mehr zu empfangen ist.
 
 \subsection{Absorption}
 
 Je höher die Frequenz ist, desto mehr wird in Flüssigkeiten wie Wasser absorbiert. Das ist für LF noch kein Problem, für Mikrowellen aber schon.
-Deswegen sind es vor allem \glqq Behälter\grqq{} mit Flüssigkeiten, wie Flaschen oder Menschen, die das Signal erheblich stören. Aber auch
+Deswegen sind es vor allem Behälter mit Flüssigkeiten, wie Flaschen oder Menschen, die das Signal erheblich stören. Aber auch
 Objekte, die ungefähr so groß wie die Sender-/Empfänger-Antennen sind oder das in Bleistiften enthaltene Graphit haben Einfluss auf das
 empfangene Signal. Auch Alufolie ist in der Lage das Signal zu stören, bzw. komplett zu eliminieren.
 
-(\textbf{TODO} Welche Auswirkung auf RFID?)
+Dies macht RFID als Labels für Gegenstände mit Flüssigkeiten bzw. aus Metall ungeeignet.
 
 \subsection{Signalstärke zu Abstand}
 
-TODO
+Die Signalstärke nimmt mit zunehmendem Abstand ab. Es gilt ungefähr
+$$\sigma = \frac{1}{r^4}$$
 
 \section{RFID HF}
 
