@@ -117,14 +117,25 @@ speichern und es gab auch keinen erkennbaren Unterschied bei den Scans. Daher ne
 
 \section{Oszilloskop, Spektrumanalysator und Frequenzgenerator}
 
-TODO: Oszilloskop: Amplitude gegen Zeit, Spektrumanalysator: Amplitude gegen Frequenz, Amplitudenmodulation: AM, Frequenzmodulation: FM,
-Seitenbänder
+Im Oszilloskop wird die Amplitude gegen die Zeit aufgetragen und das empfangene Signal als Sinuskurve dargestellt. Damit lässt sich u.a.
+die Amplitudenmodulation sehr gut darstellen. Dagegen sieht man Seitenbänder kaum. Dafür ist der Spektrumanalysator besser geeignet, bei
+dem die Amplitude gegen die Frequenz aufgetragen ist. Damit lassen sich, wie bereits geschrieben, Seitenbänder und damit die Bandbreite
+besser darstellen und damit auch besser untersuchen. So sind im Spektrumanalysator die verschiedenen WLAN-Kanäle deutlich zu erkennen.
 
 \section{Schwingkreis, Resonanz, Lastmodulation und Demodulation}
 
-TODO
+Bei der Kopplung zweier Schwingkreise, bei dem einer an einen Frequenzgenerator angeschlossen ist und der andere an eine Platine mit
+LED kann man die Energieübertragung durch magnetische Kopplung nachweisen. Dabei strahlt die LED heller, je näher man an die
+Resonanzfrequenz des Schwingkreises kommt. Hinzukommt die Position der Spulen zueinander. Optimal ist zum einen, wenn die Spulen parallel
+zueinander angeordnet sind und dabei einen gewissen Abstand nicht überschreiten (die Strecke, bei der die Magnetfeldlinien der Spule
+noch gerade verlaufen). Danach wird die Energieübertragung schwächer. Die Spulen können auch nebeneinander angeordnet werden.
 
-%\newpage
+Was hingegen nicht funktioniert ist, wenn die Spulen um $90\degree$ zueinander gedreht sind oder sich unter einer Spule eine Alufolie
+befindet, die das Magnetfeld stört.
+
+Um die Resonanzbreite zu bestimmen, muss erstmal die Resonanzkurve gemessen werden. Die Messwerte dazu befinden sich in Tabelle \ref{tab:resonanzkurve}
+auf Seite \pageref{tab:resonanzkurve}.
+
 \begin{table}[ht]
 \caption{\label{tab:resonanzkurve}Messwerte zur Bestimmung der Resonanzkurve.}
 \centering
@@ -145,6 +156,8 @@ TODO
 \bottomrule
 \end{tabular}
 \end{table}
+
+
 
 \section{1,3 GHz Mikrowellen}
 
