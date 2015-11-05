@@ -157,7 +157,10 @@ auf Seite \pageref{tab:resonanzkurve}.
 \end{tabular}
 \end{table}
 
-
+Um die Resonanzbreite bestimmen zu können, müssen wir erst die maximale Spannung bestimmen, die bei $\SI{68.8}{\volt}$ liegt. Dann muss
+die obere und untere Grenzfrequenz bestimmt werden, die sich dort befindet, wo auf der Resonanzkurve die maximale Spannung auf $\frac{1}{\sqrt{2}}$
+dessen gefallen ist, also auf $\SI{48.6}{\volt}$. Die obere und untere Grenzfrequenz liegt bei $f_o = 140,4 kHz$ und $f_u = 126,9 kHz$.
+Die Resonanzbreite ist die Differenz der Grenzfrequenzen, also $b = f_o - f_u = 140,4 kHz - 126,9 kHz = 13,5 kHz$.
 
 \section{1,3 GHz Mikrowellen}
 
@@ -184,16 +187,11 @@ TODO
 
 \section{NFC}
 
-\subsection{Was ist NFC?}
+NFC ist RFID, wobei die stikte Trennung zwischen Lesegerät und Transponder aufgehoben wird. Es sendet im HF-Bereich bei 13,56 MHz.
 
-NFC ist RFID, bei der die stikte Trennung zwischen Lesegerät und Tag/Transponder aufgehoben wird.
-NFC verwendet den HF-Bereich bei 13,56 MHz.
+Im Praktikum haben wir mit Hilfe von NFC-fähigen Smartphones Tags ausgelesen, beschrieben und gelernt, dass man damit u.a.
+auf Webseiten oder E-Mail-Adressen verweisen oder SMS vorbereiten kann.
 
-\subsection{Vorbereitete Tags}
-
-\subsection{Tag konfigurieren}
-
-\subsection{Übertragung zwischen zwei Smartphones}
 
 Mit Android Beam ist es möglich Inhalte zwischen zwei Android-Telefonen übertragen.
 Wir konnten eine URL übertragen, wenn eine Website geöffnet ist und den App Store
