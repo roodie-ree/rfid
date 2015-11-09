@@ -136,9 +136,7 @@ befindet, die das Magnetfeld stört.
 Um die Resonanzbreite zu bestimmen, muss zuerst die Resonanzkurve gemessen werden. Die Messwerte dazu befinden sich in Tabelle \ref{tab:resonanzkurve}
 auf Seite \pageref{tab:resonanzkurve}.
 
-\begin{table}[ht]
-\caption{\label{tab:resonanzkurve}Messwerte zur Bestimmung der Resonanzkurve.}
-\centering
+\begin{center}
 \begin{tabular}{@{}cccccc@{}}
 \toprule
   f [kHz] & U [V] & f [kHz] & U [V] & f [kHz] & U [V]\\
@@ -155,7 +153,8 @@ auf Seite \pageref{tab:resonanzkurve}.
  128 & 55,2 & 138 & 55,2 & & \\
 \bottomrule
 \end{tabular}
-\end{table}
+\captionof{table}{\label{tab:resonanzkurve}Messwerte zur Bestimmung der Resonanzkurve.}
+\end{center}
 
 \begin{center}
 \includegraphics[width=0.7\linewidth]{resonanzkurve.png}
@@ -187,7 +186,7 @@ kann.
 
 \subsection{Signalstärke zu Abstand}
 
-Die Signalstärke nimmt mit zunehmendem Abstand ab. Es gilt:
+Die Signalstärke nimmt mit zunehmendem Abstand ab. Es gilt für Abstand $r$:
 $$\sigma = \frac{1}{r^4}$$
 
 \section{RFID}
@@ -224,7 +223,7 @@ Display darstellen.
 
 Auch konnten wir an einem Mikrocontroller mit Temperaturmesser die Temperatur messen und in einer App darstellen.
 
-Weiterhin haben wir via Android Beam Inhalte zwischen Android-Smartphones übertragen, wie URLs, die dann auf dem anderen Smartphone die 
+Weiterhin haben wir via Android Beam Inhalte zwischen Android-Smartphones übertragen, wie URLs, die dann auf dem anderen Smartphone die
 entsprechende Webseite geöffnet haben oder aber gleich eine ganze App, die dann entweder die entsprechende Seite im App Store aufgerufen hat oder
 aber, wenn schon installiert, die App gestartet hat.
 
