@@ -21,6 +21,14 @@
 \rohead{David Falk, Christian Lichtsinn}
 \pagestyle{scrheadings}
 
+%Programmierzeilen
+\usepackage{listings}
+%Optionen für listings
+\lstset{
+frame=single, %Rahmen
+numbers=left %Zeilennummer 
+}
+
 %sollte als letztes Paket geladen werden
 \usepackage{hyperref}
 
@@ -67,14 +75,14 @@
 \vspace*{1cm}
 
 \noindent
-\large{Thema: \textbf{RFID LF Reader und Transponder}}
+\large{Thema: \textbf{RFID-LF-Reader und Transponder}}
 
 %KAPITEL 1
 \section{Fragen zu Atmel ATA2270-EK1}
 
 \subsection{Wann darf das Reader-Board erst eingeschaltet werden?}
 
-Erst wenn Reader-Board, die $125 kHz$-Antenne, sowie die Stromversorgung korrekt am Mainboard angebracht wurden, darf man das Reader-Board einschalten.
+Erst wenn Reader-Board und die $125 kHz$-Antenne korrekt am Mainboard angebracht wurden, darf die Stromversorgung eingesteckt werden (und damit das Board eingeschaltet).
 
 \subsection{Welche Spannung an der Spule ist zu erwarten?}
 
@@ -92,14 +100,13 @@ Die Induktivität der Antennenspule wird mit $700 \mu H$ angegeben. Bei einer Re
 
 für die Kapazität $C = 91,429 nF$ auf der Leser-Platine.
 
-\subsection{Was wäre zu beobachten, wenn eine andere Antennenspule mit unterschiedliicher Induktivität angeschlossen würde?}
+\subsection{Was wäre zu beobachten, wenn eine andere Antennenspule mit unterschiedlicher Induktivität angeschlossen würde?}
 
 Man müsste einen anderen Kondensator wählen, damit die Resonanzfrequenz $\omega_r = 125 kHz$ erreicht wird.
 
 \subsection{Ist die mitgelieferte Antenne optimal?}
 
-Die Frage ist hier u.a. optimal wofür? Man kann die Antenne entweder für Reichweite oder (Bereich... TODO!) optimieren. Die mitgelieferte Antenne
-ist ein Kompromiss aus beidem, daher kann man sagen, dass sie nicht optimiert ist.
+Die mitgelieferte Antenne ist eine Beispielantenne und nicht zB. für Reichweite optimiert.
 
 \subsection{Woraus besteht ein Tag (Transponder) im vorliegenden Kit?}
 
@@ -107,11 +114,11 @@ Ein Tag besteht aus einem integrierten Schaltkreis (intregrated circuit, IC), ei
 
 \subsection{Wie ist die Reihenfolge der gespeicherten und übertragenen Bits? Welcher Endian? Little oder Big?}
 
-Die Blockreihenfolge ist von links nach rechts von 1 bis 32. Big Endian?
+Die Blockreihenfolge ist von links nach rechts von 1 bis 32. Big Endian.
 
 \subsection{Muss ein Tag initialisiert werden? Wann?}
 
-TODO
+TODO (Ja? Vor dem Auslesen? Konfigurieren?)
 
 \subsection{Welche Eigenschaften hat ein TK5551-Transponder?}
 
@@ -119,12 +126,12 @@ Ein TK5551-Transponder hat einen Konfigurationsblock und 7 Datenblöcke, jeder D
 
 \subsection{Welche Eigenschaften hat ein ATA5577-Transponder?}
 
-Ein ATA5577-Transponder hat einen Konfigurationsblock, 7 Datenblöcke à 32 bits (zusammen 224 bits) und 2 ID-Blöcken, sowie einem konfigurierbaren
+Ein ATA5577-Transponder hat einen Konfigurationsblock, 7 Datenblöcke à 32 bits (zusammen 224 bits) und 2 ID-Blöcken, sowie ein konfigurierbares
 Analog-Frontend.
 
 \subsection{Welche Besonderheiten hat ein ATA5570-Transponder?}
 
-Je nachdem, ob die Impedanz hoch oder niedrig ist, werden die Daten korrekt oder invers versendet.
+Je nachdem, ob die Impedanz hoch oder niedrig ist (was man mit dem Jumper J2 einstellen kann), werden die Daten korrekt oder invers versendet.
 
 %KAPITEL 2
 \section{Fragen zu SamSys-UHF-Reader}
@@ -137,7 +144,7 @@ sich ein $50\ohm$-Abschlusswiderstand anstatt der Antenne befindet.
 
 \subsection{Könnten mehrere UHF-Lesegeräte sich gegenseitig beeinflussen?}
 
-Ja.
+TODO (Ja? Nein?)
 
 \subsection{Was bedeutet ISO 18000-6?}
 
@@ -148,6 +155,85 @@ ISO 18000-6 ist eine Norm für die Spezifikation der Luftschnittstelle im UHF-Be
 TODO
 
 %KAPITEL 3
+\section{ATA2270-EK RFID-Reader Praktikumsaufgaben}
 
+select tag/reader
+read/write menu
+block beschreiben und einzeln bestätigen
+
+\subsection{TK5551 und ATA5570 Transponder am Reader-Board}
+
+Damit der Reader den Transponder auslesen kann, muss er erstmal entsprechend eingestellt werden.
+
+Wir konnten den TK5551 Transponder auslesen, ihn neu beschreiben und den Transponder einer andernen Gruppe auslesen mit den Daten, die
+diese in die Blöcke geschrieben haben.
+
+Den ATA5570 Transponder konnten wir ebenfalls erfolgreich auslesen und wie erwartet wurden mit dem Abstecken von Jumper J2 die Daten
+in den Blöcken invertiert.
+
+\subsection{ATA2270-EK1 via RS232-Schnittstelle am PC}
+
+Einstellen: local echo, senden und antwort: CR+LF (carriage return + line feed)
+
+\subsection{Softwareversionsabfrage}
+
+\begin{lstlisting}[caption={Softwareversionsabfrage}]
+ CMREV
+ OK 0019 SW v3.4 Dec 17 2009
+\end{lstlisting}
+
+\subsection{HF anschalten und Transponder-Typ einstellen}
+
+CMRFC1111ON
+
+Transponder-Typ hätte mitgelieferte
+
+CMSRT 5551
+
+eingestellt werden müssen, hat aber nicht funktioniert, daher am Reader selbst eingestellt.
+
+\subsection{Tag-Test}
+
+CMKTIF
+
+--> OK 0007 No Tag
+
+--> OK 0011 Tag Present
+
+\subsection{Tag auslesen}
+
+RDRTS 32
+
+RDRSS 32
+
+liest die ersten 32 bit aus.
+
+\subsection{Modulationsart ändern}
+
+RDSRM0000MAN 
+
+--> 000EEEEE
+
+RDSRM0000BP1
+
+--> FFFEFFFF
+
+RDSRM0000BP2
+
+--> 33300000
+
+\subsection{ATA5577 ATA5570 Transponder via RS232-Schnittstelle am PC}
+
+ANRMD (Herstellerdaten auslesen)
+
+\section{Animal-ID: ISO 11748/11785}
+
+Country: 0114 (276d), National: 16D75895C5, CRC 672F (Häkchen)
+
+an rca --> OK 0030 1 0 0276 098102187461 672F OK
+
+\section{SamSys-UHF-Reader}
+
+Aufgrund von Software-Problemen konnten wir diese Testreihe nicht durchführen.
 
 \end{document}
