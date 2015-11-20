@@ -157,9 +157,12 @@ TODO
 %KAPITEL 3
 \section{ATA2270-EK RFID-Reader Praktikumsaufgaben}
 
-select tag/reader
-read/write menu
-block beschreiben und einzeln bestätigen
+Der ATA2270-EK RFID-Reader besitzt 4 F-Tasten und einen drückbaren Joystick. Mit allen F-Tasten geht man im Menü einen Menüpunkt zurück,
+mit dem Joystick geht man durch das Menü und bestätigt mit Druck auf dem Joystick.
+
+Eingestellt wird der Tag in dem Menüpunkt \textbf{select tag/reader}. Ausgelesen und beschrieben werden können die Datenblöcke des Tags
+in dem Menüpunkt \textbf{read/write menu}. Dabei muss man beachten, dass der Datenblock erst beschrieben ist, nachdem man ihn mit
+Druck auf den Joystick einzeln bestätigt.
 
 \subsection{TK5551 und ATA5570 Transponder am Reader-Board}
 
@@ -173,54 +176,75 @@ in den Blöcken invertiert.
 
 \subsection{ATA2270-EK1 via RS232-Schnittstelle am PC}
 
-Einstellen: local echo, senden und antwort: CR+LF (carriage return + line feed)
+Um eine sinnvolle Ausgabe in TeraTerm zu bekommen, sollte man erst \textbf{local echo} einstellen, um nicht blind tippen zu müssen,
+sowie die gesendeten Befehle und empfangenen Antworten auf \textbf{CR+LF} (carriage return + line feed) einstellen, damit die Ausgabe der
+Befehle nicht überschrieben wird.
 
-\subsection{Softwareversionsabfrage}
+\subsubsection{Softwareversionsabfrage}
 
-\begin{lstlisting}[caption={Softwareversionsabfrage}]
+Die Softwareversion kann man mit folgenden Befehl abfragen und erhält dann die entsprechende Antwort, sofern alles ordentlich eingerichtet ist:
+
+\begin{lstlisting}[caption={Softwareversionsabfrage.}]
  CMREV
  OK 0019 SW v3.4 Dec 17 2009
 \end{lstlisting}
 
-\subsection{HF anschalten und Transponder-Typ einstellen}
+\subsubsection{HF anschalten und Transponder-Typ einstellen}
 
-CMRFC1111ON
+Das Hochfrequenzfeld wird mit folgenden Befehl angeschaltet:
 
-Transponder-Typ hätte mitgelieferte
+\begin{lstlisting}[caption={HF anschalten.}]
+ CMRFC1111ON
+\end{lstlisting}
 
-CMSRT 5551
+Um den Transponder-Typ einzustellen, damit man den Transponder überhaupt auslesen kann, müsste man eigentlich
 
-eingestellt werden müssen, hat aber nicht funktioniert, daher am Reader selbst eingestellt.
+\begin{lstlisting}[caption={Transponder-Typ einstellen.}]
+ CMSRT 5551
+\end{lstlisting}
 
-\subsection{Tag-Test}
+als Befehl eingeben, laut Dokumentation. Das hat aber nicht funktioniert und wir haben auch nicht herausgefunden, wie man das via TeraTerm
+einstellt, deswegen haben wir das am Reader-Board selbst durchgeführt.
 
-CMKTIF
+\subsubsection{Tag-Test}
 
---> OK 0007 No Tag
+Um zu testen, ob sich überhaupt ein Tag im HF-Feld befindet oder nicht, nutzt man folgenden Befehl und erhält als Antwort entweder \glqq 
+No Tag\grqq{} oder \glqq Tag Present\grqq.
 
---> OK 0011 Tag Present
+\begin{lstlisting}[caption={Vorhandensein des Tags im HF-Feld testen.}]
+ CMKTIF
+ OK 0007 No Tag
+ OK 0011 Tag Present
+\end{lstlisting}
 
-\subsection{Tag auslesen}
+\subsubsection{Tag auslesen}
 
-RDRTS 32
+Die beiden folgenden Befehle
 
+\begin{lstlisting}[caption={Tag auslesen.}]
+ RDRTS 32
+ RDRSS 32
+\end{lstlisting}
+
+lesen die ersten 32 bit aus.
+
+\subsubsection{Modulationsart ändern}
+
+Mit \textbf{MAN} für \glqq Manchester\grqq{}, \textbf{BP1} für \glqq Bi-Phase1\grqq{} und \textbf{BP2} für \glqq Bi-Phase2\grqq{} kann
+man die Modulationsart entsprechend ändern. Im folgenden sind die Befehle und die Datenausgabe vom ersten Datenblock vom gleichen
+Transponder.
+
+\begin{lstlisting}[caption={Modulationsart ändern und Ausgabe anzeigen.}]
+RDSRM0000MAN
 RDRSS 32
-
-liest die ersten 32 bit aus.
-
-\subsection{Modulationsart ändern}
-
-RDSRM0000MAN 
-
---> 000EEEEE
-
+000EEEEE
 RDSRM0000BP1
-
---> FFFEFFFF
-
+RDRSS 32
+FFFEFFFF
 RDSRM0000BP2
-
---> 33300000
+RDRSS 32
+33300000
+\end{lstlisting}
 
 \subsection{ATA5577 ATA5570 Transponder via RS232-Schnittstelle am PC}
 
