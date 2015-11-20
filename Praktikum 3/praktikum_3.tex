@@ -26,7 +26,7 @@
 %Optionen für listings
 \lstset{
 frame=single, %Rahmen
-numbers=left %Zeilennummer 
+numbers=left %Zeilennummer
 }
 
 %sollte als letztes Paket geladen werden
@@ -77,6 +77,8 @@ numbers=left %Zeilennummer
 \noindent
 \large{Thema: \textbf{RFID-LF-Reader und Transponder}}
 
+\end{titlepage}
+
 %KAPITEL 1
 \section{Fragen zu Atmel ATA2270-EK1}
 
@@ -92,8 +94,6 @@ Es ist eine Spannung von $200 V$ zu erwarten.
 
 Die Induktivität der Antennenspule wird mit $700 \mu H$ angegeben. Bei einer Resonanzfrequenz von $\omega_r = 125 kHz$ ergibt sich mit
 
-\end{titlepage}
-
 \begin{align}
  \omega_r = \frac{1}{\sqrt{LC}} \Leftrightarrow C = \frac{1}{L \cdot \omega_r^2}
 \end{align}
@@ -106,7 +106,8 @@ Man müsste einen anderen Kondensator wählen, damit die Resonanzfrequenz $\omeg
 
 \subsection{Ist die mitgelieferte Antenne optimal?}
 
-Die mitgelieferte Antenne ist eine Beispielantenne und nicht zB. für Reichweite optimiert.
+Die mitgelieferte Antenne ist eine Beispielantenne und nicht auf ein bestimmtes
+Anwendungsszenario optimiert.
 
 \subsection{Woraus besteht ein Tag (Transponder) im vorliegenden Kit?}
 
@@ -118,20 +119,23 @@ Die Blockreihenfolge ist von links nach rechts von 1 bis 32. Big Endian.
 
 \subsection{Muss ein Tag initialisiert werden? Wann?}
 
-TODO (Ja? Vor dem Auslesen? Konfigurieren?)
+Ein Tag ist zwar von Anfang an lesbar, aber muss natürlich für den Einsatz mit
+sinnvollen Daten initialisiert werden.
 
 \subsection{Welche Eigenschaften hat ein TK5551-Transponder?}
 
-Ein TK5551-Transponder hat einen Konfigurationsblock und 7 Datenblöcke, jeder Datenblock speichert 32 bits und damit insgesamt 224 bits.
+Ein TK5551-Transponder hat einen Konfigurationsblock und 7 Datenblöcke, jeder Datenblock speichert 32 Bits und damit insgesamt 224 Bits.
 
 \subsection{Welche Eigenschaften hat ein ATA5577-Transponder?}
 
-Ein ATA5577-Transponder hat einen Konfigurationsblock, 7 Datenblöcke à 32 bits (zusammen 224 bits) und 2 ID-Blöcken, sowie ein konfigurierbares
+Ein ATA5577-Transponder hat einen Konfigurationsblock, 7 Datenblöcke à 32 Bits (zusammen 224 Bits) und 2 ID-Blöcken, sowie ein konfigurierbares
 Analog-Frontend.
 
 \subsection{Welche Besonderheiten hat ein ATA5570-Transponder?}
 
-Je nachdem, ob die Impedanz hoch oder niedrig ist (was man mit dem Jumper J2 einstellen kann), werden die Daten korrekt oder invers versendet.
+Je nachdem, ob die Impedanz hoch oder niedrig ist (was man mit dem Jumper J2
+einstellen kann), werden die Daten korrekt oder invers versendet. Beschreibbar
+ist der Tag nur bei niedriger Impedanz, also mit J2.
 
 %KAPITEL 2
 \section{Fragen zu SamSys-UHF-Reader}
@@ -148,7 +152,7 @@ TODO (Ja? Nein?)
 
 \subsection{Was bedeutet ISO 18000-6?}
 
-ISO 18000-6 ist eine Norm für die Spezifikation der Luftschnittstelle im UHF-Bereich (Ultra High Frequency) von $860 MHz$ bis $960 MHz$. 
+ISO 18000-6 ist eine Norm für die Spezifikation der Luftschnittstelle im UHF-Bereich (Ultra High Frequency) von $860 MHz$ bis $960 MHz$.
 
 \subsection{Wie können Tags mit der RF Command Suite und der RS232-Schnittstelle gelesen werden?}
 
@@ -171,8 +175,7 @@ Damit der Reader den Transponder auslesen kann, muss er erstmal entsprechend ein
 Wir konnten den TK5551 Transponder auslesen, ihn neu beschreiben und den Transponder einer andernen Gruppe auslesen mit den Daten, die
 diese in die Blöcke geschrieben haben.
 
-Den ATA5570 Transponder konnten wir ebenfalls erfolgreich auslesen und wie erwartet wurden mit dem Abstecken von Jumper J2 die Daten
-in den Blöcken invertiert.
+Den ATA5570 Transponder konnten wir ebenfalls erfolgreich auslesen und wie erwartet wurden mit dem Abstecken von Jumper J2 die Daten in den Blöcken invertiert.
 
 \subsection{ATA2270-EK1 via RS232-Schnittstelle am PC}
 
@@ -235,15 +238,15 @@ man die Modulationsart entsprechend ändern. Im folgenden sind die Befehle und d
 Transponder.
 
 \begin{lstlisting}[caption={Modulationsart ändern und Ausgabe anzeigen.}]
-RDSRM0000MAN
-RDRSS 32
-000EEEEE
-RDSRM0000BP1
-RDRSS 32
-FFFEFFFF
-RDSRM0000BP2
-RDRSS 32
-33300000
+ RDSRM0000MAN
+ RDRSS 32
+ 000EEEEE
+ RDSRM0000BP1
+ RDRSS 32
+ FFFEFFFF
+ RDSRM0000BP2
+ RDRSS 32
+ 33300000
 \end{lstlisting}
 
 \subsection{ATA5577 ATA5570 Transponder via RS232-Schnittstelle am PC}
