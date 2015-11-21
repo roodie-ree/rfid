@@ -72,10 +72,12 @@ numbers=left %Zeilennummer
   \par\rule{\linewidth}{1.5pt}\par
 \endgroup
 
-\vspace*{1cm}
+\vspace*{\stretch{1}} %stretch zählt all stretch zusammen (hier 1+2=3) und verteilt den vspace entsprechend, hier 1/3
 
-\noindent
-\large{Thema: \textbf{RFID-LF-Reader und Transponder}}
+\centering
+\Huge{\textbf{\textsl{RFID-LF-Reader\\ und Transponder}}}
+
+\vspace*{\stretch{2}} %und hier 2/3 vspace vom Rest der Seite.
 
 \end{titlepage}
 
@@ -107,7 +109,8 @@ Man müsste einen anderen Kondensator wählen, damit die Resonanzfrequenz $\omeg
 \subsection{Ist die mitgelieferte Antenne optimal?}
 
 Die mitgelieferte Antenne ist eine Beispielantenne und nicht auf ein bestimmtes
-Anwendungsszenario optimiert.
+Anwendungsszenario optimiert. %Diese Formulierung schwächt die Antwort ab. Sie verschleiert, dass wir nicht wissen, welche beiden
+%optimalen Anwendungsszenarien wir kennen. Die vorherige Formulierung hat zumindest noch eine der beiden nennen können.
 
 \subsection{Woraus besteht ein Tag (Transponder) im vorliegenden Kit?}
 
@@ -234,8 +237,8 @@ lesen die ersten 32 bit aus.
 \subsubsection{Modulationsart ändern}
 
 Mit \textbf{MAN} für \glqq Manchester\grqq{}, \textbf{BP1} für \glqq Bi-Phase1\grqq{} und \textbf{BP2} für \glqq Bi-Phase2\grqq{} kann
-man die Modulationsart entsprechend ändern. Im folgenden sind die Befehle und die Datenausgabe vom ersten Datenblock vom gleichen
-Transponder.
+man die Modulationsart entsprechend ändern. Im folgenden findet man die Befehle und die Datenausgabe vom ersten Datenblock vom gleichen
+Transponder:
 
 \begin{lstlisting}[caption={Modulationsart ändern und Ausgabe anzeigen.}]
  RDSRM0000MAN
@@ -249,15 +252,38 @@ Transponder.
  33300000
 \end{lstlisting}
 
-\subsection{ATA5577 ATA5570 Transponder via RS232-Schnittstelle am PC}
+\subsection{ATA5577 und ATA5570 Transponder via RS232-Schnittstelle am PC}
 
-ANRMD (Herstellerdaten auslesen)
+TODO (was noch dazu?)
+
+Liest man die Herstellerdaten am Reader-Board aus, bekommt man folgende Darstellung:
+
+\begin{tabular}{ll}
+ ACL: E0 & LotID: 55048\\
+ MFC: 15 & Wafer\#: 09\\
+ ICR: 01 & Die\#: 3843 
+\end{tabular}
+
+Via TeraTerm bekommt man mit folgenden Befehl diese Antwort für die Herstellerdaten:
+ 
+\begin{lstlisting}[caption={Herstellerdaten auslesen.}]
+ ANRMD
+ E000006EF8000076
+\end{lstlisting}
 
 \section{Animal-ID: ISO 11748/11785}
 
-Country: 0114 (276d), National: 16D75895C5, CRC 672F (Häkchen)
+Um die Daten aus Animal-ID-Chips auslesen zu können, gibt man folgenden Befehl ein und erhält zB. diese Antwort:
 
-an rca --> OK 0030 1 0 0276 098102187461 672F OK
+\begin{lstlisting}[caption={Animal-ID-Abfrage.}]
+ ANRCA
+ OK 0030 1 0 0276 098102187461 672F OK
+\end{lstlisting}
+
+Nur was bedeuten die Zahlen jetzt, die man erhalten hat? Animal-IDs werden nach ISO 11784 und 11785 spezifiziert. 11784 beschreibt dabei
+die Code-Struktur. In dieser wird beschrieben, dass die Zahl \textbf{276} nach der ISO-Ländercodierung 3166 für Deutschland steht. Danach
+folgt gewöhnlich eine 0 und dann eine dreistellige Zahl, die den Hersteller identifiziert, in diesem Falle Datamars (981). Die Zahlen danach
+sind laufende Herstellungsnummern.
 
 \section{SamSys-UHF-Reader}
 
