@@ -75,7 +75,7 @@ numbers=left %Zeilennummer
 \vspace*{\stretch{1}} %stretch zählt all stretch zusammen (hier 1+2=3) und verteilt den vspace entsprechend, hier 1/3
 
 \centering
-\Huge{\textbf{\textsl{RFID-LF-Reader\\ und Transponder}}}
+\Huge{\textbf{\textsl{RFID-Reader\\ und Transponder}}}
 
 \vspace*{\stretch{2}} %und hier 2/3 vspace vom Rest der Seite.
 
@@ -151,7 +151,7 @@ sich ein $50\ohm$-Abschlusswiderstand anstatt der Antenne befindet.
 
 \subsection{Könnten mehrere UHF-Lesegeräte sich gegenseitig beeinflussen?}
 
-TODO (Ja? Nein?)
+Ja, es wird aber versucht dies durch Anti-Kollisionsverfahren zu vermeiden.
 
 \subsection{Was bedeutet ISO 18000-6?}
 
@@ -159,7 +159,7 @@ ISO 18000-6 ist eine Norm für die Spezifikation der Luftschnittstelle im UHF-Be
 
 \subsection{Wie können Tags mit der RF Command Suite und der RS232-Schnittstelle gelesen werden?}
 
-TODO
+Die Software stand nicht zur Verfügung.
 
 %KAPITEL 3
 \section{ATA2270-EK RFID-Reader Praktikumsaufgaben}
@@ -214,7 +214,7 @@ einstellt, deswegen haben wir das am Reader-Board selbst durchgeführt.
 
 \subsubsection{Tag-Test}
 
-Um zu testen, ob sich überhaupt ein Tag im HF-Feld befindet oder nicht, nutzt man folgenden Befehl und erhält als Antwort entweder \glqq 
+Um zu testen, ob sich überhaupt ein Tag im HF-Feld befindet oder nicht, nutzt man folgenden Befehl und erhält als Antwort entweder \glqq
 No Tag\grqq{} oder \glqq Tag Present\grqq.
 
 \begin{lstlisting}[caption={Vorhandensein des Tags im HF-Feld testen.}]
@@ -254,18 +254,16 @@ Transponder:
 
 \subsection{ATA5577 und ATA5570 Transponder via RS232-Schnittstelle am PC}
 
-TODO (was noch dazu?)
-
 Liest man die Herstellerdaten am Reader-Board aus, bekommt man folgende Darstellung:
 
 \begin{tabular}{ll}
  ACL: E0 & LotID: 55048\\
  MFC: 15 & Wafer\#: 09\\
- ICR: 01 & Die\#: 3843 
+ ICR: 01 & Die\#: 3843
 \end{tabular}
 
 Via TeraTerm bekommt man mit folgenden Befehl diese Antwort für die Herstellerdaten:
- 
+
 \begin{lstlisting}[caption={Herstellerdaten auslesen.}]
  ANRMD
  E000006EF8000076
