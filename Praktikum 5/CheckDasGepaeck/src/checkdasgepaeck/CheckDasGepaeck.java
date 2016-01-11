@@ -16,6 +16,7 @@ public class CheckDasGepaeck {
                 IllegalAccessException |
                 UnsupportedLookAndFeelException ex) {
         }
+        SerialCommunication.open();
         ui = new UI();
     }
 
