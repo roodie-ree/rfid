@@ -21,6 +21,8 @@
 \rohead{David Falk, Christian Lichtsinn}
 \pagestyle{scrheadings}
 
+\usepackage{subcaption}
+
 %Programmierzeilen
 \usepackage{listings}
 %Optionen für listings
@@ -86,15 +88,78 @@ numbers=left %Zeilennummer
 %KAPITEL 1
 \section{Einleitung}
 
-bla
+Das Leben als Bodenpersonal eines Flughafens ist kein einfaches. Hier die Piloten, die wesentlich mehr verdienen,
+da die Reisenden, die sich demnächst am Strand vergnügen. Und dann das Bodenpersonal, das schnell und ohne große
+Komplikation die Reisenden einchecken soll und trotzdem an die Sicherheit denken muss.
+
+Wir schreiben das Jahr 20XX. Inzwischen sind alle möglichen Gegenstände mit RFID-(HF)-Tags versehen. Wäre es doch
+toll, wenn das Bodenpersonal ein Programm hätte, mit dem sich schnell und zuverlässig das Handgepäck scannen ließe.
+
+Oh welch ein Glück gibt es \textbf{CheckDasGepäck!} Einfach das Programm starten, kurz scannen und fertig.
+Vollautomatisch ohne Knöpfchen drücken. Jetzt muss man nur noch schauen, bei der Arbeit nicht einzuschlafen, weil
+man (fast) nichts mehr zu tun hat.
 
 \section{Installation}
 
-bla
+Die \glqq Installation\grqq{} besteht darin eine jar-Datei herunterzuladen/übermittelt zu bekommen und auszuführen.
+Zwecks fehlendem Webspace sprechen Sie uns bitte an, wenn Sie die jar-Datei haben möchten (und/oder den
+Quellcode).
 
 \section{Anwendung}
 
-bla
+Damit das Programm \textbf{CheckDasGepäck!} ordentlich läuft, muss an dem PC, an dem das Programm ausgeführt
+werden soll, der \textbf{scemtec} am seriellen Port angeschlossen sein. Vorher sollte noch das Programm
+Unidemo.exe, das auf ein paar der Labor-PCs vorinstalliert ist, gestartet werden, um zu testen, ob der
+scemtec auch funktioniert. Dabei wird der scemtec auch auf die Baud-Rate eingestellt, die das Programm benötigt.
+
+Weiterhin benötigt \textbf{CheckDasGepäck!} eine \glqq \textbf{tagid.txt}\grqq{} Datei im gleichen Ordner, in dem
+sich auch die Datei \glqq \textbf{CheckDasGepaeck.jar}\grqq{} befindet. \textbf{tagid.txt} ist eine einfache
+Textdatei, in der die IDs der Tags festgehalten und einem Objekt zugeordnet werden. Zudem hat das Objekt noch
+ein Attribut \textbf{good} oder \textbf{bad}. Die Werte werden mit einem Leerzeichen getrennt. Beispiel:
+
+\begin{lstlisting}
+ 383EC34C000104E0 Laptop good
+ 6C3DC34C000104E0 BigMac bad
+\end{lstlisting}
+
+Mit dieser Textdatei weiß das Programm, welcher Tag welchem Objekt zugeordnet wurde und ob das Objekt mit dem
+Handgepäck ins Flugzeug darf.
+
+Ist jetzt also der \textbf{scemtec} angeschlossen und getestet und die tagid.txt vorbereitet, dann kann
+man das eigentliche Programm starten. Entweder mit Doppelklick oder aus der Konsole aus mit:
+
+\begin{lstlisting}
+ java -jar CheckDasGepaeck.jar
+\end{lstlisting}
+
+Sobald gestartet, muss man gar nichts mehr machen. Das Programm läuft ohne Knopfdruck und erkennt Tags im
+Lesefeld automatisch. In Abbildung \ref{fig:app} sieht man, wie das Programm aussieht, wenn es gestartet
+wurde und noch keine Tags im Lesefeld sind (\ref{fig:start}), wenn Tags erkannt wurden, die ohne Probleme
+mit ins Flugzeug gebracht werden können (\ref{fig:green}) und wie es aussieht, wenn ein Tag erkannt wurde,
+das nicht mit ins Flugzeug darf (\ref{fig:red}).
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[t]{.3\linewidth}
+    \includegraphics[width=.95\linewidth]{screenshot0}
+    \caption{Start ohne Tags.}
+    \label{fig:start}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}[t]{.3\linewidth}
+    \includegraphics[width=.95\linewidth]{screenshot1}
+    \caption{Tags ohne Beanstandung.}
+    \label{fig:green}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{.3\linewidth}
+    \includegraphics[width=.95\linewidth]{screenshot2}
+    \caption{Tags mit Problemen.}
+    \label{fig:red}
+  \end{subfigure}%
+  \caption{CheckDasGepäck! in Aktion.}
+  \label{fig:app}
+\end{figure}
 
 \section{Code-Dokumentation}
 
