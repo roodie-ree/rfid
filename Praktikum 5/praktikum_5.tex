@@ -1,0 +1,103 @@
+%Präambel
+\documentclass[paper=a4,fontsize=11pt,headsepline,footsepline,parskip=half]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{ngerman,graphicx,textcomp,mathpazo,booktabs}
+\usepackage[decimalsymbol=comma,per=frac]{siunitx}
+\usepackage[textfont=sl,labelfont=bf]{caption}
+
+%Seite einrichten
+\areaset[2cm]		% Zusätzlicher Rand für die Bindung
+        {17cm}{24cm}	% Textbreite und -Höhe
+
+%Zeilenabstand
+\linespread{1.2} %Standardwert
+
+%Kopf- und Fußzeile
+\usepackage{scrlayer-scrpage}
+\setlength{\headheight}{23pt}
+\lohead{\includegraphics[width=0.7cm]{../logofbi} Hochschule Darmstadt}
+\rohead{David Falk, Christian Lichtsinn}
+\pagestyle{scrheadings}
+
+%Programmierzeilen
+\usepackage{listings}
+%Optionen für listings
+\lstset{
+frame=single, %Rahmen
+numbers=left %Zeilennummer
+}
+
+%sollte als letztes Paket geladen werden
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+%Titelblatt
+\begin{titlepage}
+
+\begin{minipage}[c]{5cm}
+\includegraphics[width=5cm]{../logofbi}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{10cm}
+\begin{flushright}
+\Large Einführung in die Technik\\und Anwendung von\\
+\LARGE \textbf{RFID}
+\end{flushright}
+\end{minipage}
+
+\vspace*{1cm}
+
+\begin{minipage}[c]{9cm}
+\begin{flushleft}
+\large David Falk (736532)\\Christian Lichtsinn (736787)\\Praktikum 5 \& 6: 14.12.15 \& 18.01.16: \textbf{Mo-56x}
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{7cm}
+\begin{flushright}
+\large Betreuer:\\Prof. Ralf S. Mayer\\F. Dotzauer
+\end{flushright}
+\end{minipage}
+
+\vspace*{1cm}
+
+%Workaround nötig wegen parskip Option.
+\begingroup
+  \setlength{\parskip}{0pt}% keinen Absatzabstand einfügen
+  \setlength{\parindent}{0pt}% nicht einziehen
+  \setlength{\parfillskip}{0pt plus 1fil}% Absatz darf komplett gefüllt sein
+  \par\rule{\linewidth}{1.5pt}\par
+\endgroup
+
+\vspace*{\stretch{1}} %stretch zählt all stretch zusammen (hier 1+2=3) und verteilt den vspace entsprechend, hier 1/3
+
+\centering
+\Huge{\textbf{\textsl{\huge Dokumentation zur RFID-HF-Applikation\\ \Huge Check das Gepäck!}}}
+
+\vspace*{\stretch{2}} %und hier 2/3 vspace vom Rest der Seite.
+
+\end{titlepage}
+
+\tableofcontents
+
+%KAPITEL 1
+\section{Einleitung}
+
+bla
+
+\section{Installation}
+
+bla
+
+\section{Anwendung}
+
+bla
+
+\section{Code-Dokumentation}
+
+bla
+
+\end{document}
