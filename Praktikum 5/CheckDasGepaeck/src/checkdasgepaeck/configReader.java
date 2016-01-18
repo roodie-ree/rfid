@@ -13,11 +13,10 @@ public class ConfigReader {
      * @return Hash containing the tagID as key, name and goodness as value
      */
     public static HashMap<String, String[]> read() {
-
+        HashMap<String, String[]> tagIDs = new HashMap<>();
         try {
             FileReader fr = new FileReader("tagid.txt");
             BufferedReader br = new BufferedReader(fr);
-            HashMap<String, String[]> tagIDs = new HashMap<>();
             String readLine;
 
             while ((readLine = br.readLine()) != null) {
