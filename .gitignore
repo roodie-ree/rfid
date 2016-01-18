@@ -3,3 +3,5 @@
 *.aux
 *latexmk
 *.directory
+*.out
+*_*.pdf
