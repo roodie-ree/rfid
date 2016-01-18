@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * Created by david on 07/01/2016.
  */
