@@ -3,20 +3,25 @@ package checkdasgepaeck;
 import java.io.*;
 import java.util.*;
 
-public class configReader {
+public class ConfigReader {
 
-    private HashMap<String, String[]> tagIDs;
-
-    public HashMap<String, String[]> idauslesen() {
+    /**
+     * Reads configuration out of a text file
+     * The expected format is:
+     * tagID itemName goodOrBad
+     * One item per line
+     * @return Hash containing the tagID as key, name and goodness as value
+     */
+    public static HashMap<String, String[]> read() {
 
         try {
             FileReader fr = new FileReader("tagid.txt");
             BufferedReader br = new BufferedReader(fr);
-            tagIDs = new HashMap<>();
-            String zeileauslesen;
+            HashMap<String, String[]> tagIDs = new HashMap<>();
+            String readLine;
 
-            while ((zeileauslesen = br.readLine()) != null) {
-                String[] taginfo = zeileauslesen.split(" ");
+            while ((readLine = br.readLine()) != null) {
+                String[] taginfo = readLine.split(" ");
                 tagIDs.put(taginfo[0], new String[]{taginfo[1], taginfo[2]});
             }
 

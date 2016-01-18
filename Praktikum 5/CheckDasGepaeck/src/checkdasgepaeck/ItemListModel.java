@@ -13,11 +13,17 @@ public class ItemListModel extends AbstractListModel<String> {
     private HashMap<String, String[]> itemNames;
     private ArrayList<String> items;
 
+    /**
+     * Initialize model from configuration file
+     */
     public ItemListModel() {
-        itemNames = new configReader().read();
+        itemNames =  ConfigReader.read();
         items = new ArrayList<>();
     }
 
+    /**
+     * Update tags in range
+     */
     public void update() {
         items = SerialCommunication.getInventory();
         fireContentsChanged(this, 0, items.size() - 1);
@@ -38,6 +44,10 @@ public class ItemListModel extends AbstractListModel<String> {
         }
     }
 
+    /**
+     * @param index of the element
+     * @return true if element is good, else false
+     */
     public boolean isElementGood(int index) {
         String[] item = itemNames.get(items.get(index));
         if (item != null) {

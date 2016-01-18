@@ -6,6 +6,10 @@ import java.util.logging.Logger;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
+/**
+ * Communicates with the Scemtec HF-RFID reader via serial port
+ * getInventory handles all necessary steps of communication
+ */
 public class SerialCommunication {
 
     private static final byte STX = 0x2;
@@ -14,6 +18,10 @@ public class SerialCommunication {
     private static final String GET_INVENTORY = "6C21";
     private static final SerialPort serialPort = new SerialPort("COM1");
 
+    /**
+     * open connection to the scemtec reader
+     * @return true if connected successfull
+     */
     public static boolean open() {
         try {
             if (serialPort.openPort()) {
@@ -32,6 +40,10 @@ public class SerialCommunication {
         return true;
     }
 
+    /**
+     * close connection to the scemtec reader
+     * @return true if closed successfull
+     */
     public static boolean close() {
         try {
             if (serialPort.closePort()) {
@@ -46,20 +58,27 @@ public class SerialCommunication {
         return true;
     }
 
+    /**
+     * @return List of IDs of tags in scanning range
+     */
     public static ArrayList<String> getInventory() {
+        // get amount of tags in scanning range
         sendCommand(GET_AMOUNT.getBytes());
+        // discard response
         receiveResponse();
+        // get IDs of tags in scanning range
         sendCommand(GET_INVENTORY.getBytes());
         String response = receiveResponse();
         return processGetInventory(response);
     }
+
 
     private static ArrayList<String> processGetInventory(String response) {
         if (response.substring(0, 4).compareTo(GET_INVENTORY) != 0) {
             System.out.println("Wrong response. Expected " + GET_INVENTORY + ", got " + response.substring(0, 4));
             return new ArrayList();
         }
-
+        //
         String ids = response.substring(8);
         int amount = Integer.parseInt(response.substring(4, 8), 16);
         ArrayList<String> inventory = new ArrayList();
@@ -74,12 +93,16 @@ public class SerialCommunication {
         int i = 0;
         boolean stxRead = false;
         char buffer[] = new char[bufferSize];
+        // read one byte at a time, until we get command end (ETX)
         while (i < bufferSize) {
             try {
                 byte smallBuffer[] = serialPort.readBytes(1);
-                if (smallBuffer[0] == 0x2) {
+                // command start read
+                if (smallBuffer[0] == STX) {
                     stxRead = true;
-                } else if (smallBuffer[0] == 0x3) {
+                // command end read
+                } else if (smallBuffer[0] == ETX) {
+                    // discard checksum
                     serialPort.readBytes(1);
                     break;
                 } else if (stxRead) {
@@ -90,6 +113,7 @@ public class SerialCommunication {
                 Logger.getLogger(SerialCommunication.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        // now the buffer contains everything between start and end
         return String.copyValueOf(buffer);
     }
 
