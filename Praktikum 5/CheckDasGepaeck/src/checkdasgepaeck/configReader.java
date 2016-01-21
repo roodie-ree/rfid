@@ -10,7 +10,7 @@ public class ConfigReader {
      * The expected format is:
      * tagID itemName goodOrBad
      * One item per line
-     * @return Hash containing the tagID as key, name and goodness as value
+     * @return HashMap containing the tagID as key, name and goodness as value
      */
     public static HashMap<String, String[]> read() {
         HashMap<String, String[]> tagIDs = new HashMap<>();
